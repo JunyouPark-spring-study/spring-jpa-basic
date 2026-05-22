@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import jpashop.domain.Order;
+import jpashop.domain.OrderItem;
 
 public class JpaMain {
 
@@ -15,6 +17,13 @@ public class JpaMain {
 
         try {
             // 비영속
+            Order order = new Order();
+            em.persist(order);
+//            order.addOrderItem(new OrderItem());
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+
+            em.persist(orderItem);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
